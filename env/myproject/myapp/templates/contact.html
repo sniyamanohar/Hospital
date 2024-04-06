@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        // Not Required Styles:
+.container{
+  padding: 16rem;
+}
+body{
+background: rgb(238,174,202);
+background: -moz-linear-gradient(138deg, rgba(238,174,202,1) 0%, rgba(35,159,245,1) 100%);
+background: -webkit-linear-gradient(138deg, rgba(238,174,202,1) 0%, rgba(35,159,245,1) 100%);
+background: linear-gradient(138deg, rgba(238,174,202,1) 0%, rgba(35,159,245,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#eeaeca",endColorstr="#239ff5",GradientType=1);
+}
+
+// I don't like this, not required
+textarea {
+  resize: none;
+}
+
+
+// Required SCSS
+
+.form-control:focus {
+  border: 2px solid #DD99BB;
+  box-shadow: 0 0 0 0px;
+}
+.customStyle-card-title-form{
+  margin-bottom: 1rem;
+}
+.customStyle-card-form{
+  height: 22rem;
+  width: 45rem;
+  border-radius: 1rem;
+  padding: 0.75rem;
+  background-color: #1F1A38;
+  color: white;
+  border: 4px solid #DD99BB;
+}
+.customStyle-card-form span{
+  border-top-right-radius: 0px!important;
+  border-bottom-right-radius: 0px!important;
+}
+.customStyle-form-row{
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+.customStyle-card-form .form-control{
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  border-radius: 0.25rem;
+  border: 2px solid #DD99BB;
+}
+.customStyle-card-form .input-group-text{
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  border-radius: 0.25rem;
+  border: 2px solid #DD99BB;
+  background-color: #1F1A38;
+  color: white;
+  border-right: 0px;
+}
+#contactName{
+  border-top-right-radius: 1rem;
+  border-top-left-radius: 1rem;
+}
+#contactMessage{
+  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+.customStyle-btn-primary{
+  background-color: #1F1A38;
+  border: 2px solid #DD99BB;
+  transition: 0.3s;
+   width: 6rem;
+}
+.customStyle-btn-primary:hover{
+  width: 9rem;
+  background-color: #DD99BB;
+  border: 2px solid #DD99BB;
+}
+
+.customStyle-Form-Correct{
+  background-color: #99F7AB;
+}
+.customStyle-Form-Incorrect{
+  background-color: #FFC15E;
+}
+
+
+    </style>
+
+</head>
+<body>
+<div class="container">
+  <div class="row mx-auto">
+      <div class="card customStyle-card-form">
+        <div class="card-body">
+          <h5 class="card-title customStyle-card-title-form"><i class="bi bi-person"></i> Contact</h5>
+
+            <form class="row g-3 needs-validation" onsubmit="validateForm()" name="contactForm">
+
+              <div class="col-md-3">
+                <label for="validationCustom01" class="form-label">Full Name</label>
+                <input name="fullName" type="text" id="fullNameForm" class="form-control" value="" required autocomplete="off">
+             </div>
+
+             <div class="col-md-4">
+               <label for="validationCustom02" class="form-label">Phone</label>
+               <div class="input-group has-validation">
+                  <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-telephone-fill"></i></span>
+                  <input name="phone" type="text" id="phoneForm" class="form-control" aria-describedby="inputGroupPrepend" required autocomplete="off">
+               </div>
+             </div>
+
+              <div class="col-md-5">
+                <label for="validationCustomUsername" class="form-label">Email</label>
+                <div class="input-group has-validation">
+                  <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-envelope-at-fill"></i></span>
+                  <input name="email" type="text" id="emailForm" class="form-control" aria-describedby="inputGroupPrepend" required autocomplete="off">
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <label for="validationCustom03" class="form-label">Message</label>
+                <textarea type="text" class="form-control" required autocomplete="off"></textarea>
+              </div>
+
+              <div class="col-12">
+                <button class="btn btn-primary customStyle-btn-primary" type="submit" ><i class="bi bi-send-fill"></i> Send </button>
+              </div>
+
+            </form>
+
+        </div>
+    </div>
+  </div>
+</div>
+<script>
+    function validatePhoneNumber(number) {
+    let re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+    return re.test(number);
+}
+
+function ValidateEmail(mail) {
+ if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(contactForm.email.value)){
+    return true;
+  }
+    return false;
+}
+
+function validateForm() {
+
+  let fullName = document.forms["contactForm"]["fullName"].value;
+  let phone = document.forms["contactForm"]["phone"].value;
+  let email = document.forms["contactForm"]["email"].value;
+  let incorrectCounter = 0;
+
+  if (fullName == "") {
+    document.getElementById("fullNameForm").classList.add("customStyle-Form-Incorrect");
+    incorrectCounter++;
+  }
+  else{
+    try {
+    document.getElementById("fullNameForm").classList.remove("customStyle-Form-Incorrect");
+    }
+    catch {
+      document.getElementById("fullNameForm").classList.add("customStyle-Form-Correct");
+    }
+  document.getElementById("fullNameForm").classList.add("customStyle-Form-Correct");
+  }
+
+  if (validatePhoneNumber(phone) == false){
+    document.getElementById("phoneForm").classList.add("customStyle-Form-Incorrect");
+    incorrectCounter++;
+  }
+  else{
+    try {
+    document.getElementById("phoneForm").classList.remove("customStyle-Form-Incorrect");
+    }
+    catch {
+      document.getElementById("phoneForm").classList.add("customStyle-Form-Correct");
+    }
+  document.getElementById("phoneForm").classList.add("customStyle-Form-Correct");
+  }
+
+  if (ValidateEmail(email) == false){
+    document.getElementById("emailForm").classList.add("customStyle-Form-Incorrect");
+    incorrectCounter++;
+  }
+  else{
+    try {
+    document.getElementById("emailForm").classList.remove("customStyle-Form-Incorrect");
+    }
+    catch {
+      document.getElementById("emailForm").classList.add("customStyle-Form-Correct");
+    }
+  document.getElementById("emailForm").classList.add("customStyle-Form-Correct");
+  }
+
+  if (incorrectCounter == false){
+    return false;
+  }
+  else{
+    return true;
+  }
+
+}
+</script>
+</body>
+</html>
